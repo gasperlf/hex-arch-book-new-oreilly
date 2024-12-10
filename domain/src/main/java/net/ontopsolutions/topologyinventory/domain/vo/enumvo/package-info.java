@@ -1,0 +1,1 @@
+package net.ontopsolutions.topologyinventory.domain.vo.enumvo;
