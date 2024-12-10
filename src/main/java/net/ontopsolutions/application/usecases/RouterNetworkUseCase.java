@@ -6,4 +6,7 @@ import net.ontopsolutions.domain.vo.id.RouterId;
 
 public interface RouterNetworkUseCase {
     Router addNetworkToRouter(RouterId routerId, Network network);
+
+    Router getRouter(RouterId routerId);
+
 }
