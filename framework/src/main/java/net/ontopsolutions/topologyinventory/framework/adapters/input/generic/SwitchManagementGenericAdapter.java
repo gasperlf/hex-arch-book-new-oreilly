@@ -1,7 +1,6 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.input.generic;
 
-import net.ontopsolutions.topologyinventory.application.ports.input.RouterManagementInputPort;
-import net.ontopsolutions.topologyinventory.application.ports.input.SwitchManagementInputPort;
+
 import net.ontopsolutions.topologyinventory.application.usecases.RouterManagementUseCase;
 import net.ontopsolutions.topologyinventory.application.usecases.SwitchManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.entity.EdgeRouter;
@@ -14,23 +13,16 @@ import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.RouterType;
 import net.ontopsolutions.topologyinventory.domain.vo.SwitchType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
-import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.RouterManagementH2Adapter;
-import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.SwitchManagementH2Adapter;
 
 public class SwitchManagementGenericAdapter {
 
-    private SwitchManagementUseCase switchManagementUseCase;
-    private RouterManagementUseCase routerManagementUseCase;
+    private  SwitchManagementUseCase switchManagementUseCase;
+    private  RouterManagementUseCase routerManagementUseCase;
 
-    public SwitchManagementGenericAdapter(){
-        setPorts();
+    public SwitchManagementGenericAdapter(SwitchManagementUseCase switchManagementUseCase, RouterManagementUseCase routerManagementUseCase){
+        this.switchManagementUseCase = switchManagementUseCase;
+        this.routerManagementUseCase = routerManagementUseCase;
     }
-
-    private void setPorts() {
-        this.switchManagementUseCase = new SwitchManagementInputPort(SwitchManagementH2Adapter.getInstance());
-        this.routerManagementUseCase = new RouterManagementInputPort(RouterManagementH2Adapter.getInstance());
-    }
-
     /**
      * GET /switch/retrieve/{id}
      * */

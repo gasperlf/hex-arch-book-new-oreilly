@@ -7,21 +7,15 @@ import net.ontopsolutions.topologyinventory.application.usecases.SwitchManagemen
 import net.ontopsolutions.topologyinventory.domain.entity.Switch;
 import net.ontopsolutions.topologyinventory.domain.vo.Id;
 import net.ontopsolutions.topologyinventory.domain.vo.Network;
-import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.RouterManagementH2Adapter;
-import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.SwitchManagementH2Adapter;
 
 public class NetworkManagementGenericAdapter {
 
     private SwitchManagementUseCase switchManagementUseCase;
     private NetworkManagementUseCase networkManagementUseCase;
 
-    public NetworkManagementGenericAdapter() {
-        setPorts();
-    }
-
-    private void setPorts() {
-        this.switchManagementUseCase = new SwitchManagementInputPort(SwitchManagementH2Adapter.getInstance());
-        this.networkManagementUseCase = new NetworkManagementInputPort(RouterManagementH2Adapter.getInstance());
+    public NetworkManagementGenericAdapter(SwitchManagementUseCase switchManagementUseCase, NetworkManagementUseCase networkManagementUseCase) {
+        this.networkManagementUseCase = networkManagementUseCase;
+        this.switchManagementUseCase = switchManagementUseCase;
     }
 
     /**

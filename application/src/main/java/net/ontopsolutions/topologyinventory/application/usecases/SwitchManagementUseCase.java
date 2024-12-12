@@ -1,5 +1,6 @@
 package net.ontopsolutions.topologyinventory.application.usecases;
 
+import net.ontopsolutions.topologyinventory.application.ports.output.SwitchManagementOutputPort;
 import net.ontopsolutions.topologyinventory.domain.entity.EdgeRouter;
 import net.ontopsolutions.topologyinventory.domain.entity.Switch;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
@@ -18,5 +19,7 @@ public interface SwitchManagementUseCase {
     EdgeRouter addSwitchToEdgeRouter(Switch networkSwitch, EdgeRouter edgeRouter);
 
     EdgeRouter removeSwitchFromEdgeRouter(Switch networkSwitch, EdgeRouter edgeRouter);
+
+    void setOutputPort(SwitchManagementOutputPort switchManagementOutputPort);
 
 }

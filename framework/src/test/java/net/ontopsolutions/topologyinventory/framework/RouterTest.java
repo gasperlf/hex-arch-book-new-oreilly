@@ -16,10 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class RouterTest extends FrameworkTestData {
 
-    RouterManagementGenericAdapter routerManagementGenericAdapter;
-
     public RouterTest() {
-        this.routerManagementGenericAdapter = new RouterManagementGenericAdapter();
+        loadPortsAndUseCases();
         loadData();
     }
 

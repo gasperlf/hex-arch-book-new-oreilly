@@ -1,5 +1,6 @@
 package net.ontopsolutions.topologyinventory.application.usecases;
 
+import net.ontopsolutions.topologyinventory.application.ports.output.RouterManagementOutputPort;
 import net.ontopsolutions.topologyinventory.domain.entity.CoreRouter;
 import net.ontopsolutions.topologyinventory.domain.entity.Router;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
@@ -22,4 +23,6 @@ public interface RouterManagementUseCase {
     Router retrieveRouter(Id id);
 
     Router persistRouter(Router router);
+
+    void setOutputPort(RouterManagementOutputPort routerManagementOutputPort);
 }

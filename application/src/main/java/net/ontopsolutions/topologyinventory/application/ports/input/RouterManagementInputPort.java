@@ -53,4 +53,9 @@ public class RouterManagementInputPort implements RouterManagementUseCase {
     public Router persistRouter(Router router) {
         return routerManagementOutputPort.persistRouter(router);
     }
+
+    @Override
+    public void setOutputPort(RouterManagementOutputPort routerManagementOutputPort) {
+        this.routerManagementOutputPort = routerManagementOutputPort;
+    }
 }

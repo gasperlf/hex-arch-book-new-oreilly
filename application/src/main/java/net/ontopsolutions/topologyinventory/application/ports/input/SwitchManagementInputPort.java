@@ -49,4 +49,9 @@ public class SwitchManagementInputPort implements SwitchManagementUseCase {
         edgeRouter.removeSwitch(networkSwitch);
         return edgeRouter;
     }
+
+    @Override
+    public void setOutputPort(SwitchManagementOutputPort switchManagementOutputPort) {
+        this.switchManagementOutputPort = switchManagementOutputPort;
+    }
 }

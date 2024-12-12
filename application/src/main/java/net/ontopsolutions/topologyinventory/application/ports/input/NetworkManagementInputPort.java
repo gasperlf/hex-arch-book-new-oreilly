@@ -58,4 +58,9 @@ public class NetworkManagementInputPort implements NetworkManagementUseCase {
 
         return switchToRemoveNetwork.removeNetworkFromSwitch(network) ? switchToRemoveNetwork : null;
     }
+
+    @Override
+    public void setOutputPort(RouterManagementOutputPort routerNetworkOutputPort) {
+        this.routerManagementOutputPort = routerNetworkOutputPort;
+    }
 }

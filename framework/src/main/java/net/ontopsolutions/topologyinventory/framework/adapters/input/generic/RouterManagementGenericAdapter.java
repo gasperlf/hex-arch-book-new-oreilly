@@ -1,6 +1,5 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.input.generic;
 
-import net.ontopsolutions.topologyinventory.application.ports.input.RouterManagementInputPort;
 import net.ontopsolutions.topologyinventory.application.usecases.RouterManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.entity.CoreRouter;
 import net.ontopsolutions.topologyinventory.domain.entity.Router;
@@ -10,18 +9,14 @@ import net.ontopsolutions.topologyinventory.domain.vo.Location;
 import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.RouterType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
-import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.RouterManagementH2Adapter;
+
 
 public class RouterManagementGenericAdapter {
 
-    private RouterManagementUseCase routerManagementUseCase;
+    private  RouterManagementUseCase routerManagementUseCase;
 
-    public RouterManagementGenericAdapter(){
-        setPorts();
-    }
-
-    private void setPorts(){
-        this.routerManagementUseCase = new RouterManagementInputPort(RouterManagementH2Adapter.getInstance());
+    public RouterManagementGenericAdapter(RouterManagementUseCase routerManagementUseCase){
+        this.routerManagementUseCase = routerManagementUseCase;
     }
 
     /**

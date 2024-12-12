@@ -10,4 +10,15 @@ module framework {
 
     exports net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
     opens net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
+
+    provides net.ontopsolutions.topologyinventory.application.ports.output.RouterManagementOutputPort
+            with net.ontopsolutions.topologyinventory.framework.adapters.output.h2.RouterManagementH2Adapter;
+    provides net.ontopsolutions.topologyinventory.application.ports.output.SwitchManagementOutputPort
+            with net.ontopsolutions.topologyinventory.framework.adapters.output.h2.SwitchManagementH2Adapter;
+
+    uses net.ontopsolutions.topologyinventory.application.usecases.RouterManagementUseCase;
+    uses net.ontopsolutions.topologyinventory.application.usecases.SwitchManagementUseCase;
+    uses net.ontopsolutions.topologyinventory.application.usecases.NetworkManagementUseCase;
+    uses net.ontopsolutions.topologyinventory.application.ports.output.RouterManagementOutputPort;
+    uses net.ontopsolutions.topologyinventory.application.ports.output.SwitchManagementOutputPort;
 }
