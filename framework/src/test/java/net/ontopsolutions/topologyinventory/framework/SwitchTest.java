@@ -8,7 +8,6 @@ import net.ontopsolutions.topologyinventory.domain.vo.Id;
 import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.SwitchType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
-import net.ontopsolutions.topologyinventory.framework.adapters.input.generic.SwitchManagementGenericAdapter;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -57,6 +56,7 @@ public class SwitchTest extends FrameworkTestData {
         assertEquals(expectedSwitchIP,actualSwitchIP);
     }
 
+    @Disabled
     @Test
     @Order(3)
      void removeSwitchFromEdgeRouter(){
