@@ -12,4 +12,6 @@ public interface NetworkManagementUseCase {
 
     Switch removeNetworkFromSwitch(Network network, Switch networkSwitch);
 
+    Switch removeNetworkFromSwitch(String name, Switch networkSwitch);
+
 }

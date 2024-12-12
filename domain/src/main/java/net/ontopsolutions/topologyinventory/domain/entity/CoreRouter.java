@@ -2,6 +2,7 @@ package net.ontopsolutions.topologyinventory.domain.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import net.ontopsolutions.topologyinventory.domain.specification.EmptyRouterSpec;
 import net.ontopsolutions.topologyinventory.domain.specification.EmptySwitchSpec;
@@ -20,7 +21,7 @@ import java.util.Map;
 @ToString
 public class CoreRouter extends Router {
 
-    @Getter
+    @Setter
     private Map<Id, Router> routers;
 
     @Builder

@@ -1,5 +1,6 @@
 package net.ontopsolutions.topologyinventory.application.ports.input;
 
+import lombok.NoArgsConstructor;
 import net.ontopsolutions.topologyinventory.application.ports.output.RouterManagementOutputPort;
 import net.ontopsolutions.topologyinventory.application.usecases.RouterManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.entity.CoreRouter;
@@ -12,13 +13,23 @@ import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.RouterType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
 
+@NoArgsConstructor
 public class RouterManagementInputPort implements RouterManagementUseCase {
 
     RouterManagementOutputPort routerManagementOutputPort;
 
+    public RouterManagementInputPort(RouterManagementOutputPort routerManagementOutputPort) {
+        this.routerManagementOutputPort = routerManagementOutputPort;
+    }
+
     @Override
-    public Router createRouter(Vendor vendor, Model model, IP ip, Location location, RouterType routerType) {
-        return RouterFactory.getRouter(null, vendor, model, ip, location, routerType);
+    public Router createRouter(Id id, Vendor vendor, Model model, IP ip, Location location, RouterType routerType) {
+        return RouterFactory.getRouter(id, vendor, model, ip, location, routerType);
+    }
+
+    @Override
+    public Router removeRouter(Id id) {
+        return routerManagementOutputPort.removeRouter(id);
     }
 
     @Override

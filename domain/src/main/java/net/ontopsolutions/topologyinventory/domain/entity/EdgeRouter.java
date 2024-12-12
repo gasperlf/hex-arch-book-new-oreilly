@@ -2,7 +2,9 @@ package net.ontopsolutions.topologyinventory.domain.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
+import net.ontopsolutions.topologyinventory.domain.specification.EmptyNetworkSpec;
 import net.ontopsolutions.topologyinventory.domain.specification.SameCountrySpec;
 import net.ontopsolutions.topologyinventory.domain.specification.SameIpSpec;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
@@ -18,6 +20,7 @@ import java.util.Map;
 @ToString
 public class EdgeRouter extends Router {
 
+    @Setter
     private Map<Id, Switch> switches;
 
     @Builder

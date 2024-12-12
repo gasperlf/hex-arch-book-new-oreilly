@@ -1,11 +1,7 @@
-package net.ontopsolutions.topologyinventory.application;
+package net.ontopsolutions.topologyinventory.framework;
 
-import net.ontopsolutions.topologyinventory.application.ports.input.NetworkManagementInputPort;
-import net.ontopsolutions.topologyinventory.application.ports.input.RouterManagementInputPort;
-import net.ontopsolutions.topologyinventory.application.ports.input.SwitchManagementInputPort;
-import net.ontopsolutions.topologyinventory.application.usecases.NetworkManagementUseCase;
-import net.ontopsolutions.topologyinventory.application.usecases.RouterManagementUseCase;
-import net.ontopsolutions.topologyinventory.application.usecases.SwitchManagementUseCase;
+
+
 import net.ontopsolutions.topologyinventory.domain.entity.CoreRouter;
 import net.ontopsolutions.topologyinventory.domain.entity.EdgeRouter;
 import net.ontopsolutions.topologyinventory.domain.entity.Router;
@@ -24,16 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ApplicationTestData {
-
-    protected RouterManagementUseCase routerManagementUseCase;
-
-    protected SwitchManagementUseCase switchManagementUseCase;
-
-    protected NetworkManagementUseCase networkManagementUseCase;
-
-    protected Router router;
-
+public class FrameworkTestData {
     protected List<Router> routers = new ArrayList<>();
 
     protected List<Switch> switches = new ArrayList<>();
@@ -61,23 +48,20 @@ public class ApplicationTestData {
     protected Location locationB;
 
     public void loadData(){
-        this.routerManagementUseCase = new RouterManagementInputPort();
-        this.switchManagementUseCase = new SwitchManagementInputPort();
-        this.networkManagementUseCase = new NetworkManagementInputPort();
         this.locationA = Location.builder().
-                address("Av Republica Argentina 3109").
-                city("Curitiba").
-                state("PR").
-                country("Brazil").
-                zipCode(80610260).
-                latitude(10F).
-                longitude(-10F).
+                address("Amos Ln").
+                city("Tully").
+                state("NY").
+                country("United States").
+                zipCode(13159).
+                latitude(42.797310F).
+                longitude(-76.130750F).
                 build();
         this.locationB = Location.builder().
                 address("Av Republica Argentina 3109").
                 city("Curitiba").
                 state("PR").
-                country("Brazil").
+                country("Italy").
                 zipCode(80610260).
                 latitude(10F).
                 longitude(-10F).
@@ -125,7 +109,6 @@ public class ApplicationTestData {
                 location(locationA).
                 routerType(RouterType.CORE).
                 build();
-        this.coreRouter.addRouter(newCoreRouter);
         this.newEdgeRouter = EdgeRouter.builder().
                 id(Id.withId("ca23800e-9b5a-11eb-a8b3-0242ac130003")).
                 vendor(Vendor.CISCO).

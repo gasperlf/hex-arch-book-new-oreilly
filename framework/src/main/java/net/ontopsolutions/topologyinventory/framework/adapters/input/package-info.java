@@ -1,0 +1,1 @@
+package net.ontopsolutions.topologyinventory.framework.adapters.input;

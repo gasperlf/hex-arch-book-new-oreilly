@@ -1,1 +1,0 @@
-package net.ontopsolutions.framework.adapters.input;
