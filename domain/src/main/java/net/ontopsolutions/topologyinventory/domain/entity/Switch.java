@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 public class Switch extends Equipment {
 
     private SwitchType switchType;
+    @Setter
     private List<Network> switchNetworks;
 
     @Setter

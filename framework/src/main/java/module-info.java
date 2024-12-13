@@ -9,6 +9,9 @@ module framework {
     requires com.fasterxml.jackson.core;
     requires jakarta.enterprise.cdi.api;
     requires jakarta.inject.api;
+    requires java.ws.rs;
+    requires io.smallrye.mutiny;
+    requires microprofile.openapi.api;
 
     exports net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
     opens net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
