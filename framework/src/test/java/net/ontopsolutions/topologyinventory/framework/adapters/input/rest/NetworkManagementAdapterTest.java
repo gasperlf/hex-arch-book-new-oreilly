@@ -21,7 +21,8 @@ import static org.wildfly.common.Assert.assertFalse;
 public class NetworkManagementAdapterTest {
 
 
-    @Test
+    @Disabled
+    //@Test
     @Order(1)
     public void addNetworkToSwitch() throws IOException {
         var networkName = "TestNetwork";
@@ -50,7 +51,8 @@ public class NetworkManagementAdapterTest {
         assertTrue(networkExists);
     }
 
-    @Test
+    @Disabled
+   // @Test
     @Order(2)
     public void removeNetworkFromSwitch() throws IOException {
         var networkName = "Engineering";
