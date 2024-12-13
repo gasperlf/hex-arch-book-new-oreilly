@@ -1,22 +1,22 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.input.generic;
 
-import net.ontopsolutions.topologyinventory.application.ports.input.NetworkManagementInputPort;
-import net.ontopsolutions.topologyinventory.application.ports.input.SwitchManagementInputPort;
 import net.ontopsolutions.topologyinventory.application.usecases.NetworkManagementUseCase;
 import net.ontopsolutions.topologyinventory.application.usecases.SwitchManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.entity.Switch;
 import net.ontopsolutions.topologyinventory.domain.vo.Id;
 import net.ontopsolutions.topologyinventory.domain.vo.Network;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+@ApplicationScoped
 public class NetworkManagementGenericAdapter {
 
+    @Inject
     private SwitchManagementUseCase switchManagementUseCase;
-    private NetworkManagementUseCase networkManagementUseCase;
 
-    public NetworkManagementGenericAdapter(SwitchManagementUseCase switchManagementUseCase, NetworkManagementUseCase networkManagementUseCase) {
-        this.networkManagementUseCase = networkManagementUseCase;
-        this.switchManagementUseCase = switchManagementUseCase;
-    }
+    @Inject
+    private NetworkManagementUseCase networkManagementUseCase;
 
     /**
      * POST /network/add

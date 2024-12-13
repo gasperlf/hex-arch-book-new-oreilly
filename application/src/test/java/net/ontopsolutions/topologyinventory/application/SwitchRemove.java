@@ -4,12 +4,18 @@ package net.ontopsolutions.topologyinventory.application;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import net.ontopsolutions.topologyinventory.application.usecases.SwitchManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.entity.Switch;
 import net.ontopsolutions.topologyinventory.domain.vo.Id;
+
+import javax.inject.Inject;
 
 import static org.junit.Assert.*;
 
 public class SwitchRemove extends ApplicationTestData{
+
+    @Inject
+    SwitchManagementUseCase switchManagementUseCase;
 
     Id id;
     Switch switchToBeRemoved;

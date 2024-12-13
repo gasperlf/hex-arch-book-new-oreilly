@@ -12,14 +12,14 @@ import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.SwitchType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
 
-@NoArgsConstructor
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+@ApplicationScoped
 public class SwitchManagementInputPort implements SwitchManagementUseCase {
 
-    SwitchManagementOutputPort switchManagementOutputPort;
-
-    public SwitchManagementInputPort(SwitchManagementOutputPort switchManagementOutputPort){
-        this.switchManagementOutputPort = switchManagementOutputPort;
-    }
+    @Inject
+    private SwitchManagementOutputPort switchManagementOutputPort;
 
     @Override
     public Switch createSwitch(Vendor vendor, Model model, IP ip, Location location, SwitchType switchType) {
@@ -50,8 +50,4 @@ public class SwitchManagementInputPort implements SwitchManagementUseCase {
         return edgeRouter;
     }
 
-    @Override
-    public void setOutputPort(SwitchManagementOutputPort switchManagementOutputPort) {
-        this.switchManagementOutputPort = switchManagementOutputPort;
-    }
 }

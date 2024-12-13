@@ -4,12 +4,15 @@ package net.ontopsolutions.topologyinventory.application;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import net.ontopsolutions.topologyinventory.application.usecases.RouterManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.entity.CoreRouter;
 import net.ontopsolutions.topologyinventory.domain.entity.EdgeRouter;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
 import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
 
+
+import javax.inject.Inject;
 
 import static net.ontopsolutions.topologyinventory.domain.vo.RouterType.CORE;
 import static net.ontopsolutions.topologyinventory.domain.vo.RouterType.EDGE;
@@ -19,11 +22,16 @@ import static org.junit.Assert.assertNotNull;
 
 public class RouterAdd extends ApplicationTestData {
 
+    @Inject
+    RouterManagementUseCase routerManagementUseCase;
+
     CoreRouter anotherCoreRouter;
 
     public RouterAdd(){
         loadData();
     }
+
+
     //Adding an edge router to a core router
     @Given("I have an edge router")
     public void assert_edge_router_exists(){

@@ -3,10 +3,13 @@ package net.ontopsolutions.topologyinventory.application;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import net.ontopsolutions.topologyinventory.application.usecases.RouterManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
 import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
 
+
+import javax.inject.Inject;
 
 import static net.ontopsolutions.topologyinventory.domain.vo.RouterType.CORE;
 import static net.ontopsolutions.topologyinventory.domain.vo.RouterType.EDGE;
@@ -15,9 +18,14 @@ import static org.junit.Assert.assertNotNull;
 
 public class RouterCreate extends ApplicationTestData {
 
+    @Inject
+    RouterManagementUseCase routerManagementUseCase;
+
     public RouterCreate(){
         loadData();
     }
+
+
     //Creating a new core router
     @Given("I provide all required data to create a core router")
     public void create_core_router(){

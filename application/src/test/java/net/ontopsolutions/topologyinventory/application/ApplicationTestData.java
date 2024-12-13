@@ -26,12 +26,6 @@ import java.util.Map;
 
 public class ApplicationTestData {
 
-    protected RouterManagementUseCase routerManagementUseCase;
-
-    protected SwitchManagementUseCase switchManagementUseCase;
-
-    protected NetworkManagementUseCase networkManagementUseCase;
-
     protected Router router;
 
     protected List<Router> routers = new ArrayList<>();
@@ -61,9 +55,7 @@ public class ApplicationTestData {
     protected Location locationB;
 
     public void loadData(){
-        this.routerManagementUseCase = new RouterManagementInputPort();
-        this.switchManagementUseCase = new SwitchManagementInputPort();
-        this.networkManagementUseCase = new NetworkManagementInputPort();
+
         this.locationA = Location.builder().
                 address("Av Republica Argentina 3109").
                 city("Curitiba").

@@ -3,14 +3,20 @@ package net.ontopsolutions.topologyinventory.application;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import net.ontopsolutions.topologyinventory.application.usecases.NetworkManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.service.NetworkService;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
 import net.ontopsolutions.topologyinventory.domain.vo.Network;
+
+import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class NetworkAdd extends ApplicationTestData {
+
+    @Inject
+    NetworkManagementUseCase networkManagementUseCase;
 
     public NetworkAdd(){
         loadData();

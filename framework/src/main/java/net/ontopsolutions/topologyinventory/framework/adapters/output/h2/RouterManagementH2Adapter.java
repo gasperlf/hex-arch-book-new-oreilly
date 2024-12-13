@@ -10,6 +10,9 @@ import net.ontopsolutions.topologyinventory.domain.vo.Id;
 import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data.RouterData;
 import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.mappers.RouterH2Mapper;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class RouterManagementH2Adapter implements RouterManagementOutputPort {
 
     private static RouterManagementH2Adapter instance;

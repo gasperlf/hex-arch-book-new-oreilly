@@ -4,10 +4,15 @@ package net.ontopsolutions.topologyinventory.application;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import net.ontopsolutions.topologyinventory.application.usecases.RouterManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.entity.CoreRouter;
 import net.ontopsolutions.topologyinventory.domain.entity.EdgeRouter;
 import net.ontopsolutions.topologyinventory.domain.entity.Router;
 
+
+import javax.inject.Inject;
+
+import java.util.Map;
 
 import static junit.framework.TestCase.assertTrue;
 import static net.ontopsolutions.topologyinventory.domain.vo.RouterType.CORE;
@@ -17,11 +22,16 @@ import static org.junit.Assert.assertEquals;
 
 public class RouterRemove extends ApplicationTestData {
 
+    @Inject
+    RouterManagementUseCase routerManagementUseCase;
+
     CoreRouter coreRouterToBeRemoved;
 
     public RouterRemove(){
         loadData();
     }
+
+
     //Removing an edge router from a core router
     @Given("The core router has at least one edge router connected to it")
     public void the_core_router_has_at_least_one_edge_router_connected_to_it(){
@@ -68,7 +78,7 @@ public class RouterRemove extends ApplicationTestData {
                 getRouters().
                 entrySet().
                 stream().
-                map(routerMap -> routerMap.getValue()).
+                map(Map.Entry::getValue).
                 filter(predicate).
                 findFirst().
                 get();

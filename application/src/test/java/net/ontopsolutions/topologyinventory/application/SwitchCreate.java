@@ -3,15 +3,21 @@ package net.ontopsolutions.topologyinventory.application;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import net.ontopsolutions.topologyinventory.application.usecases.SwitchManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
 import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.SwitchType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
 
+import javax.inject.Inject;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class SwitchCreate extends ApplicationTestData {
+
+    @Inject
+    SwitchManagementUseCase switchManagementUseCase;
 
     public SwitchCreate(){
         loadData();

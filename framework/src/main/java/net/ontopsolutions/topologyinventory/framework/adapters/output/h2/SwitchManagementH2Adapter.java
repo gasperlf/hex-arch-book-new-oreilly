@@ -10,6 +10,10 @@ import net.ontopsolutions.topologyinventory.domain.vo.Id;
 import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data.SwitchData;
 import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.mappers.RouterH2Mapper;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+@ApplicationScoped
 public class SwitchManagementH2Adapter implements SwitchManagementOutputPort {
 
     private static SwitchManagementH2Adapter instance;

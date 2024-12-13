@@ -1,6 +1,5 @@
 package net.ontopsolutions.topologyinventory.application.usecases;
 
-import net.ontopsolutions.topologyinventory.application.ports.output.RouterManagementOutputPort;
 import net.ontopsolutions.topologyinventory.domain.entity.Switch;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
 import net.ontopsolutions.topologyinventory.domain.vo.Network;
@@ -14,7 +13,5 @@ public interface NetworkManagementUseCase {
     Switch removeNetworkFromSwitch(Network network, Switch networkSwitch);
 
     Switch removeNetworkFromSwitch(String name, Switch networkSwitch);
-
-    void setOutputPort(RouterManagementOutputPort routerNetworkOutputPort);
 
 }

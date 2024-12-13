@@ -10,14 +10,14 @@ import net.ontopsolutions.topologyinventory.domain.vo.Model;
 import net.ontopsolutions.topologyinventory.domain.vo.RouterType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
+@ApplicationScoped
 public class RouterManagementGenericAdapter {
 
+    @Inject
     private  RouterManagementUseCase routerManagementUseCase;
-
-    public RouterManagementGenericAdapter(RouterManagementUseCase routerManagementUseCase){
-        this.routerManagementUseCase = routerManagementUseCase;
-    }
 
     /**
      * GET /router/retrieve/{id}

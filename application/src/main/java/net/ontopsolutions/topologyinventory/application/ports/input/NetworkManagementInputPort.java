@@ -1,6 +1,5 @@
 package net.ontopsolutions.topologyinventory.application.ports.input;
 
-import lombok.NoArgsConstructor;
 import net.ontopsolutions.topologyinventory.application.ports.output.RouterManagementOutputPort;
 import net.ontopsolutions.topologyinventory.application.usecases.NetworkManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.entity.EdgeRouter;
@@ -10,15 +9,15 @@ import net.ontopsolutions.topologyinventory.domain.vo.IP;
 import net.ontopsolutions.topologyinventory.domain.vo.Id;
 import net.ontopsolutions.topologyinventory.domain.vo.Network;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.function.Predicate;
 
-@NoArgsConstructor
+@ApplicationScoped
 public class NetworkManagementInputPort implements NetworkManagementUseCase {
 
-    RouterManagementOutputPort routerManagementOutputPort;
-    public NetworkManagementInputPort(RouterManagementOutputPort routerNetworkOutputPort){
-        this.routerManagementOutputPort = routerNetworkOutputPort;
-    }
+    @Inject
+    private RouterManagementOutputPort routerManagementOutputPort;
 
     @Override
     public Network createNetwork(IP networkAddress, String networkName, int networkCidr) {
@@ -59,8 +58,4 @@ public class NetworkManagementInputPort implements NetworkManagementUseCase {
         return switchToRemoveNetwork.removeNetworkFromSwitch(network) ? switchToRemoveNetwork : null;
     }
 
-    @Override
-    public void setOutputPort(RouterManagementOutputPort routerNetworkOutputPort) {
-        this.routerManagementOutputPort = routerNetworkOutputPort;
-    }
 }

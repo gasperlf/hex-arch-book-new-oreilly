@@ -24,5 +24,5 @@ public interface RouterManagementUseCase {
 
     Router persistRouter(Router router);
 
-    void setOutputPort(RouterManagementOutputPort routerManagementOutputPort);
+
 }

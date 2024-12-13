@@ -3,12 +3,18 @@ package net.ontopsolutions.topologyinventory.application;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import net.ontopsolutions.topologyinventory.application.usecases.NetworkManagementUseCase;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
+
+import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class NetworkCreate extends ApplicationTestData {
+
+    @Inject
+    NetworkManagementUseCase networkManagementUseCase;
 
     public NetworkCreate(){
         loadData();

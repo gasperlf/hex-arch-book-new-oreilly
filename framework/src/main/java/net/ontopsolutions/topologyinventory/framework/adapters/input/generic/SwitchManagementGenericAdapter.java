@@ -14,15 +14,17 @@ import net.ontopsolutions.topologyinventory.domain.vo.RouterType;
 import net.ontopsolutions.topologyinventory.domain.vo.SwitchType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+@ApplicationScoped
 public class SwitchManagementGenericAdapter {
 
+    @Inject
     private  SwitchManagementUseCase switchManagementUseCase;
+    @Inject
     private  RouterManagementUseCase routerManagementUseCase;
 
-    public SwitchManagementGenericAdapter(SwitchManagementUseCase switchManagementUseCase, RouterManagementUseCase routerManagementUseCase){
-        this.switchManagementUseCase = switchManagementUseCase;
-        this.routerManagementUseCase = routerManagementUseCase;
-    }
     /**
      * GET /switch/retrieve/{id}
      * */

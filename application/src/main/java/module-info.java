@@ -1,6 +1,8 @@
 module application {
     requires domain;
     requires static lombok;
+    requires jakarta.inject.api;
+    requires jakarta.enterprise.cdi.api;
 
     exports net.ontopsolutions.topologyinventory.application.ports.input;
     exports net.ontopsolutions.topologyinventory.application.ports.output;
