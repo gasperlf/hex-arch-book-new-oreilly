@@ -1,46 +1,51 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
 
+import lombok.*;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name="RouterData")
 @Table(name = "routers")
-@MappedSuperclass
-@Converter(name="uuidConverter", converterClass= UUIDTypeConverter.class)
+@EqualsAndHashCode(exclude = "routers")
 public class RouterData implements Serializable {
 
     @Id
-    @Column(name="router_id",
-            columnDefinition = "uuid",
-            updatable = false )
-    @Convert("uuidConverter")
+    @Column(name="router_id", columnDefinition = "BINARY(16)")
     private UUID routerId;
 
-    @Column(name="router_parent_core_id")
-    @Convert("uuidConverter")
+    @Column(name="router_parent_core_id", columnDefinition = "BINARY(16)")
     private UUID routerParentCoreId;
 
-    @Embedded
     @Enumerated(EnumType.STRING)
-    @Column(name="router_vendor")
+    @Column(name = "router_vendor")
     private VendorData routerVendor;
 
-    @Embedded
     @Enumerated(EnumType.STRING)
     @Column(name="router_model")
     private ModelData routerModel;
 
-    @Embedded
     @AttributeOverrides({
             @AttributeOverride(
                     name = "address",
@@ -53,27 +58,20 @@ public class RouterData implements Serializable {
     })
     private IPData ip;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="location_id")
     private LocationData routerLocation;
 
-    @Embedded
     @Enumerated(EnumType.STRING)
     @Column(name="router_type")
     private RouterTypeData routerType;
 
-    @OneToMany
-    @JoinColumn(table = "switches",
-            name = "router_id",
-            referencedColumnName = "router_id")
-    @Setter
+    @OneToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name="router_id")
     private List<SwitchData> switches;
 
-    @OneToMany
-    @JoinTable(name="routers",
-            joinColumns={@JoinColumn(name="router_parent_core_id")},
-            inverseJoinColumns={@JoinColumn(name="router_id")})
-    @Setter
-    private List<RouterData> routers;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="router_parent_core_id")
+    private Set<RouterData> routers;
 
 }

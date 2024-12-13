@@ -20,6 +20,7 @@ import static org.wildfly.common.Assert.assertFalse;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class NetworkManagementAdapterTest {
 
+
     @Test
     @Order(1)
     public void addNetworkToSwitch() throws IOException {
@@ -49,7 +50,6 @@ public class NetworkManagementAdapterTest {
         assertTrue(networkExists);
     }
 
-    @Disabled
     @Test
     @Order(2)
     public void removeNetworkFromSwitch() throws IOException {

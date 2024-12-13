@@ -7,7 +7,6 @@ import net.ontopsolutions.topologyinventory.domain.vo.SwitchType;
 import net.ontopsolutions.topologyinventory.domain.vo.Vendor;
 import net.ontopsolutions.topologyinventory.framework.adapters.input.rest.request.aswitch.CreateSwitch;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -45,7 +44,6 @@ public class SwitchManagementAdapterTest {
         assertEquals(expectedSwitchId, actualSwitchId);
     }
 
-    @Disabled
     @Test
     @Order(2)
     public void createAndAddSwitchToEdgeRouter() throws IOException {

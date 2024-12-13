@@ -1,10 +1,16 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Builder
 @Getter
@@ -12,10 +18,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "location")
-@MappedSuperclass
 public class LocationData {
     @Id
     @Column(name="location_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int locationId;
 
     @Column(name="address")

@@ -1,8 +1,5 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
 
-import jakarta.persistence.Embeddable;
-
-@Embeddable
 public enum ModelData {
     XYZ0001,
     XYZ0002,

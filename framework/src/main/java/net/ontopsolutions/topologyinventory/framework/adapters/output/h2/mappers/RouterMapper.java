@@ -23,18 +23,28 @@ import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data.Sw
 import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data.SwitchTypeData;
 import net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data.VendorData;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
-public class RouterH2Mapper {
+import static net.ontopsolutions.topologyinventory.domain.vo.Id.withId;
+
+public class RouterMapper {
 
     public static Router routerDataToDomain(RouterData routerData){
         var router = RouterFactory.getRouter(
-                Id.withId(routerData.getRouterId().toString()),
+                withId(routerData.getRouterId().toString()),
                 Vendor.valueOf(routerData.getRouterVendor().toString()),
                 Model.valueOf(routerData.getRouterModel().toString()),
                 IP.fromAddress(routerData.getIp().getAddress()),
                 locationDataToLocation(routerData.getRouterLocation()),
                 RouterType.valueOf(routerData.getRouterType().name()));
+        if(routerData.getRouterParentCoreId()!=null)
+            router.setParentRouterId(Id.withId(routerData.getRouterParentCoreId().toString()));
         if(routerData.getRouterType().equals(RouterTypeData.CORE)){
             var coreRouter = (CoreRouter) router;
             coreRouter.setRouters(getRoutersFromData(routerData.getRouters()));
@@ -55,6 +65,8 @@ public class RouterH2Mapper {
                 routerLocation(locationDomainToLocationData(router.getLocation())).
                 routerType(RouterTypeData.valueOf(router.getRouterType().toString())).
                 build();
+        if(router.getParentRouterId()!=null)
+            routerData.setRouterParentCoreId(router.getParentRouterId().getId());
         if(router.getRouterType().equals(RouterType.CORE)) {
             var coreRouter = (CoreRouter) router;
             routerData.setRouters(getRoutersFromDomain(coreRouter.getRouters()));
@@ -66,16 +78,16 @@ public class RouterH2Mapper {
     }
 
     public static Switch switchDataToDomain(SwitchData switchData) {
-        return Switch.builder()
-                        .switchId(Id.withId(switchData.getSwitchId().toString()))
-                        .routerId(Id.withId(switchData.getRouterId().toString()))
-                        .vendor(Vendor.valueOf(switchData.getSwitchVendor().toString()))
-                        .model(Model.valueOf(switchData.getSwitchModel().toString()))
-                        .ip(IP.fromAddress(switchData.getIp().getAddress()))
-                        .location(locationDataToLocation(switchData.getSwitchLocation()))
-                        . switchType(SwitchType.valueOf(switchData.getSwitchType().toString()))
-                        .switchNetworks(getNetworksFromData(switchData.getNetworks()))
-                        .build();
+        return Switch.builder().
+                switchId(withId(switchData.getSwitchId().toString())).
+                routerId(withId(switchData.getRouterId().toString())).
+                vendor(Vendor.valueOf(switchData.getSwitchVendor().toString())).
+                model(Model.valueOf(switchData.getSwitchModel().toString())).
+                ip(IP.fromAddress(switchData.getIp().getAddress())).
+                location(locationDataToLocation(switchData.getSwitchLocation())).
+                switchType(SwitchType.valueOf(switchData.getSwitchType().toString())).
+                switchNetworks(getNetworksFromData(switchData.getNetworks())).
+                build();
     }
 
     public static SwitchData switchDomainToData(Switch aSwitch){
@@ -115,18 +127,18 @@ public class RouterH2Mapper {
                 .build();
     }
 
-    private static Map<Id, Router> getRoutersFromData(List<RouterData> routerDataList){
+    private static Map<Id, Router> getRoutersFromData(Set<RouterData> routerDataList){
         Map<Id,Router> routerMap = new HashMap<>();
         for (RouterData routerData : routerDataList) {
             routerMap.put(
-                    Id.withId(routerData.getRouterId().toString()),
+                    withId(routerData.getRouterId().toString()),
                     routerDataToDomain(routerData));
         }
         return routerMap;
     }
 
-    private static List<RouterData>  getRoutersFromDomain(Map<Id, Router> routers){
-        List<RouterData> routerDataList = new ArrayList<>();
+    private static Set<RouterData>  getRoutersFromDomain(Map<Id, Router> routers){
+        Set<RouterData> routerDataList = new HashSet<>();
         routers.values().stream().forEach(router -> {
             var routerData = routerDomainToData(router);
             routerDataList.add(routerData);
@@ -138,7 +150,7 @@ public class RouterH2Mapper {
         Map<Id,Switch> switchMap = new HashMap<>();
         for (SwitchData switchData : switchDataList) {
             switchMap.put(
-                    Id.withId(switchData.getSwitchId().toString()),
+                    withId(switchData.getSwitchId().toString()),
                     switchDataToDomain(switchData));
         }
         return switchMap;
@@ -154,7 +166,7 @@ public class RouterH2Mapper {
         return switchDataList;
     }
 
-    private static List<Network> getNetworksFromData(List<NetworkData> networkData){
+    private static List<Network> getNetworksFromData(Set<NetworkData> networkData){
         List<Network> networks = new ArrayList<>();
         networkData.forEach(data ->{
             var network = new Network(
@@ -166,20 +178,19 @@ public class RouterH2Mapper {
         return networks;
     }
 
-    private static List<NetworkData>  getNetworksFromDomain(List<Network> networks, UUID routerId){
-        List<NetworkData> networkDataList = new ArrayList<>();
+    private static Set<NetworkData>  getNetworksFromDomain(List<Network> networks, UUID routerId){
+        Set<NetworkData> networkDataSet = new HashSet<>();
         if(networks!=null) {
             networks.forEach(network -> {
                 var networkData = new NetworkData(
-                        routerId,
                         IPData.fromAddress(network.getNetworkAddress().getIpAddress()),
                         network.getNetworkName(),
                         network.getNetworkCidr()
                 );
-                networkDataList.add(networkData);
+                networkDataSet.add(networkData);
             });
         }
-        return networkDataList;
+        return networkDataSet;
     }
 
 }

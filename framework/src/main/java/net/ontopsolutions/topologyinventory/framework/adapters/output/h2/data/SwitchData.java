@@ -1,15 +1,25 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
 
-import java.io.Serializable;
-import java.util.List;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -18,41 +28,33 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "switches")
-@MappedSuperclass
-@Converter(name="uuidConverter", converterClass= UUIDTypeConverter.class)
-public class SwitchData implements Serializable {
+public class SwitchData {
+
+    @ManyToOne
+    private RouterData router;
 
     @Id
-    @Column(name="switch_id",
-            columnDefinition = "uuid",
-            updatable = false )
-    @Convert("uuidConverter")
+    @Column(name="switch_id", columnDefinition = "BINARY(16)")
     private UUID switchId;
 
-    @Column(name="router_id")
-    @Convert("uuidConverter")
+    @Column(name="router_id", columnDefinition = "BINARY(16)")
     private UUID routerId;
 
-    @Embedded
     @Enumerated(EnumType.STRING)
     @Column(name="switch_vendor")
     private VendorData switchVendor;
 
-    @Embedded
     @Enumerated(EnumType.STRING)
     @Column(name="switch_model")
     private ModelData switchModel;
 
     @Enumerated(EnumType.STRING)
-    @Embedded
     @Column(name = "switch_type")
     private SwitchTypeData switchType;
 
-    @OneToMany
-    @JoinColumn(table = "networks",
-            name = "switch_id",
-            referencedColumnName = "switch_id")
-    private List<NetworkData> networks;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="switch_id")
+    private Set<NetworkData> networks;
 
     @Embedded
     @AttributeOverrides({

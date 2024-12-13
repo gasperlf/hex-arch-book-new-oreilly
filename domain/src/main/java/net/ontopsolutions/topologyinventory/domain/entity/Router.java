@@ -1,6 +1,7 @@
 package net.ontopsolutions.topologyinventory.domain.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.ontopsolutions.topologyinventory.domain.vo.IP;
 import net.ontopsolutions.topologyinventory.domain.vo.Id;
 import net.ontopsolutions.topologyinventory.domain.vo.Location;
@@ -14,6 +15,8 @@ import java.util.function.Predicate;
 public abstract class Router extends Equipment {
 
     protected final RouterType routerType;
+    @Setter
+    public Id parentRouterId;
 
     public static Predicate<Equipment> getRouterTypePredicate(RouterType routerType){
         return r -> ((Router)r).getRouterType().equals(routerType);
@@ -27,9 +30,10 @@ public abstract class Router extends Equipment {
         return p -> p.location.getCountry().equals(location.getCountry());
     }
 
-    public Router(Id id, Vendor vendor, Model model, IP ip, Location location, RouterType routerType) {
+    public Router(Id id, Id parentRouterId, Vendor vendor, Model model, IP ip, Location location, RouterType routerType) {
         super(id, vendor, model, ip, location);
         this.routerType = routerType;
+        this.parentRouterId = parentRouterId;
     }
 
 }

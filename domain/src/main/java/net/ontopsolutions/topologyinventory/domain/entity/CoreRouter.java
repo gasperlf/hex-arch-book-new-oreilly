@@ -25,8 +25,8 @@ public class CoreRouter extends Router {
     private Map<Id, Router> routers;
 
     @Builder
-    public CoreRouter(Id id, Vendor vendor, Model model, IP ip, Location location, RouterType routerType, Map<Id, Router> routers) {
-        super(id, vendor, model, ip, location, routerType);
+    public CoreRouter(Id id, Id parentRouterId, Vendor vendor, Model model, IP ip, Location location, RouterType routerType, Map<Id, Router> routers) {
+        super(id,parentRouterId, vendor, model, ip, location, routerType);
         this.routers = routers;
     }
 

@@ -1,33 +1,37 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
 
-import java.io.Serializable;
-import java.util.UUID;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "networks")
-@MappedSuperclass
-@Converter(name="uuidConverter", converterClass= UUIDTypeConverter.class)
-public class NetworkData implements Serializable {
+public class NetworkData  {
+
+    @ManyToOne
+    @JoinColumn(name="switch_id")
+    private SwitchData switchData;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="network_id")
     private int id;
 
-    @Column(name="switch_id")
-    @Convert("uuidConverter")
-    private UUID switchId;
-
-    @Embedded
     @AttributeOverrides({
             @AttributeOverride(
                     name = "address",
@@ -46,8 +50,7 @@ public class NetworkData implements Serializable {
     @Column(name="network_cidr")
     Integer cidr;
 
-    public NetworkData(UUID switchId, IPData ip, String name, Integer cidr) {
-        this.switchId = switchId;
+    public NetworkData(IPData ip, String name, Integer cidr) {
         this.ip = ip;
         this.name = name;
         this.cidr = cidr;

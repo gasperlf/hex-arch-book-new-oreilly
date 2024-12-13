@@ -1,10 +1,11 @@
 package net.ontopsolutions.topologyinventory.framework.adapters.output.h2.data;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+
 import lombok.Getter;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Embeddable
 @Getter
@@ -13,7 +14,6 @@ public class IPData {
     private String address;
 
     @Enumerated(EnumType.STRING)
-    @Embedded
     private ProtocolData protocol;
 
     private IPData(String address){
